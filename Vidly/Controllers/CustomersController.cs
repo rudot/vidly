@@ -7,6 +7,7 @@ using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
+    [Authorize]
     public class CustomersController : Controller
     {
 
@@ -22,11 +23,12 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
+      
         public ViewResult Index()
         {
-            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+            //var customers = _context.Customers.Include(c => c.MembershipType).ToList();
 
-            return View(customers);
+            return View();
         }
 
         public ActionResult Details(int id)
