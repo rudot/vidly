@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using AutoMapper;
+using Vidly.Dtos;
+using Vidly.Models;
+
+namespace Vidly.Controllers.Api
+{
+    public class NewRentalsControllerPublic : ApiController
+    {
+        private ApplicationDbContext _context;
+
+        public NewRentalsControllerPublic()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateNewRentals(NewRentalDto newRental)
+        {
+
+            if (newRental.MovieIds.Count == 0)
+                return BadRequest("No movie id have been given");
+
+            // id cust yg dikirim selalu benar
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == newRental.CustomerId);
+
+            // for public API
+            //var customer = _context.Customers.SingleOrDefault(c => c.Id == newRentalDto.CustomerId);
+
+            if (customer == null)
+                return BadRequest("Invalid Id");
+            
+            var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id)).ToList();
+            
+            if(movies.Count != newRental.MovieIds.Count)
+                return BadRequest("One or more Movie Ids are invalid.");
+
+            foreach (var mov in movies)
+            {
+                if(mov.numberAvailable == 0)
+                    return BadRequest("Movie is not avaible.");
+
+                mov.numberAvailable--;
+
+                var rental = new Rental
+                {
+                    Movie = mov,
+                    Customer = customer,
+                    DateRented = DateTime.Now
+                };
+                _context.Rentals.Add(rental);
+            }
+
+            _context.SaveChanges();
+
+            //multiple record 
+            return Ok();
+        }
+    }
+}
