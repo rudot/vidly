@@ -237,7 +237,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
-    <Compile Include="Controllers\Api\NewRentalsControllerPublic.cs" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
+    <None Include="Controllers\Api\NewRentalsControllerPublic.cs.bak" />
     <Compile Include="Controllers\Api\NewRentalsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -372,6 +376,18 @@
     <Compile Include="Migrations\201703160631439_AddNumberAvailable.cs" />
     <Compile Include="Migrations\201703160631439_AddNumberAvailable.Designer.cs">
       <DependentUpon>201703160631439_AddNumberAvailable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703170252050_ChangeNumberInStock.cs" />
+    <Compile Include="Migrations\201703170252050_ChangeNumberInStock.Designer.cs">
+      <DependentUpon>201703170252050_ChangeNumberInStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703170259480_ChangeNumberAvailable.cs" />
+    <Compile Include="Migrations\201703170259480_ChangeNumberAvailable.Designer.cs">
+      <DependentUpon>201703170259480_ChangeNumberAvailable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703170300220_ChangeNumberAvailable1.cs" />
+    <Compile Include="Migrations\201703170300220_ChangeNumberAvailable1.Designer.cs">
+      <DependentUpon>201703170300220_ChangeNumberAvailable1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -597,6 +613,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.js" />
@@ -748,6 +766,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703160631439_AddNumberAvailable.resx">
       <DependentUpon>201703160631439_AddNumberAvailable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703170252050_ChangeNumberInStock.resx">
+      <DependentUpon>201703170252050_ChangeNumberInStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703170259480_ChangeNumberAvailable.resx">
+      <DependentUpon>201703170259480_ChangeNumberAvailable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703170300220_ChangeNumberAvailable1.resx">
+      <DependentUpon>201703170300220_ChangeNumberAvailable1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

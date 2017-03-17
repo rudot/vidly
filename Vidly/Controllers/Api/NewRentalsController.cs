@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -31,10 +32,10 @@ namespace Vidly.Controllers.Api
             
             foreach (var mov in movies)
             {
-                if(mov.numberAvailable == 0)
+                if(mov.NumberAvailable == 0)
                     return BadRequest("Movie is not avaible.");
 
-                mov.numberAvailable--;
+                mov.NumberAvailable--;
 
                 var rental = new Rental
                 {
@@ -45,7 +46,29 @@ namespace Vidly.Controllers.Api
                 _context.Rentals.Add(rental);
             }
 
-            _context.SaveChanges();
+           // _context.SaveChanges();
+
+            try
+            {
+                // Your code...
+                // Could also be before try if you know the exception occurs in SaveChanges
+
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    System.Diagnostics.Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        System.Diagnostics.Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
 
             //multiple record 
             return Ok();

@@ -44,10 +44,10 @@ namespace Vidly.Controllers.Api
 
             foreach (var mov in movies)
             {
-                if(mov.numberAvailable == 0)
+                if(mov.NumberAvailable == 0)
                     return BadRequest("Movie is not avaible.");
 
-                mov.numberAvailable--;
+                mov.NumberAvailable--;
 
                 var rental = new Rental
                 {
